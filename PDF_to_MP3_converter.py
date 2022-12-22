@@ -3,6 +3,7 @@ from art import tprint
 import pdfplumber
 from pathlib import Path
 import os
+import easygui
 
 
 def pdf_to_mp3(file_path='test.pdf', language='ru'):
@@ -24,12 +25,12 @@ def pdf_to_mp3(file_path='test.pdf', language='ru'):
         return 'Некорректный формат файла!'
 
 
-def main():
-    tprint('PDF to MP3', font='beer_pub')
-    file_path = input('Введите путь к файлу: ')
-    language = input('Выберите язык (ru, en): ')
-    print(pdf_to_mp3(file_path=file_path, language=language))
-
-
-if __name__ == '__main__':
-    main()
+tprint('PDF to MP3', font='beer_pub')
+while True:
+    mode = input('Нажмите "+" для выбора файла или "-" для выхода...')
+    if mode == '+':
+        file_path = easygui.fileopenbox(filetypes=['*.pdf'])
+        language = input('Выберите язык (ru, en): ')
+        print(pdf_to_mp3(file_path=file_path, language=language))
+    else:
+        break
